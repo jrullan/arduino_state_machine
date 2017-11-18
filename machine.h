@@ -19,11 +19,13 @@ class Statemachine
     State addState(void (*functionPointer)());
 
     // Attributes
-    LinkedList<State> stateList;
+    LinkedList<State> *stateList;
     int currentState = -1;
 };
 
-Statemachine::Statemachine(){};
+Statemachine::Statemachine(){
+  stateList = new LinkedList<State>();
+};
 
 Statemachine::~Statemachine(){};
 
@@ -36,7 +38,7 @@ Statemachine::~Statemachine(){};
  */
 void Statemachine::run(){
   // Early exit, no states are defined
-  if(stateList.size() == 0) return;
+  if(stateList->size() == 0) return;
 
   // Initial condition
   if(currentState == -1){
@@ -46,7 +48,7 @@ void Statemachine::run(){
   if(DEBUG) Serial.print("Evaluating S");
   if(DEBUG) Serial.println(currentState);
   
-  int next = stateList.get(currentState).execute();
+  int next = stateList->get(currentState).execute();
 
   if(DEBUG) Serial.print(" returns ");
   if(DEBUG) Serial.println(next);
@@ -63,7 +65,7 @@ void Statemachine::run(){
 State Statemachine::addState(void(*functionPointer)()){
   State s = State();
   s.stateLogic = functionPointer;
-  stateList.add(s);
+  stateList->add(s);
   return s;
 }
 
