@@ -1,5 +1,7 @@
 #include "machine.h"
 
+const int STATE_DELAY = 500;
+
 Statemachine machine = Statemachine();
 State S0;
 State S1;
@@ -32,7 +34,7 @@ void setup() {
 
 void loop() {
   machine.run();
-  delay(1000);
+  delay(STATE_DELAY);
 }
 
 
@@ -40,7 +42,6 @@ void loop() {
 
 void state0(){
   Serial.println("State 0");
-  delay(1000);
 }
 
 bool transitionS0S1(){
@@ -54,7 +55,6 @@ bool transitionS0S3(){
 //-------------------------
 void state1(){
   Serial.println("State 1");
-  delay(1000);
 }
 
 bool transitionS1S2(){
@@ -64,7 +64,6 @@ bool transitionS1S2(){
 //-------------------------
 void state2(){
   Serial.println("State 2");
-  delay(1000);
 }
 
 bool transitionS2S3(){
@@ -74,7 +73,6 @@ bool transitionS2S3(){
 //------------------------
 void state3(){
   Serial.println("State 3");
-  delay(1000);
 }
 
 bool transitionS3S4(){
@@ -84,7 +82,6 @@ bool transitionS3S4(){
 //-------------------------
 void state4(){
   Serial.println("State 4");
-  delay(1000);
 }
 
 bool transitionS4S5(){
@@ -94,7 +91,6 @@ bool transitionS4S5(){
 //-------------------------
 void state5(){
   Serial.println("State 5");
-  delay(1000);
 }
 
 bool transitionS5S0(){

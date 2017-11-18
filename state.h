@@ -57,18 +57,18 @@ void State::addTransition(bool (*conditionFunction)(), int stateNumber){
 }
 
 /*
- * Evals all transition sequentially until one of them is true.
+ * Evals all transitions sequentially until one of them is true.
  * Returns:
  * The stateNumber of the transition that evaluates to true
  * -1 if none evaluate to true
  */
 int State::evalTransitions(){
+  if(transitions->size() == 0) return -1;
   bool result = false;
   
   if(DEBUG) Serial.print("Evaluating ");
   if(DEBUG) Serial.print(transitions->size());
   if(DEBUG) Serial.println(" transitions.");
-  
   
   for(int i=0;i<transitions->size();i++){
     if(DEBUG) Serial.print("Transition ");
@@ -85,7 +85,11 @@ int State::evalTransitions(){
   return -1;
 }
 
-
+/*
+ * Execute runs the stateLogic and then evaluates
+ * all available transitions. The transition that
+ * returns true is returned.
+ */
 int State::execute(){
   if(DEBUG) Serial.println("Executing stateLogic()");
   stateLogic();
